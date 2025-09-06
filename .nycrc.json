@@ -1,0 +1,10 @@
+{
+  "extension": [".ts", ".js"],
+  "include": ["src/**/*.ts"],
+  "exclude": ["**/*.spec.ts", "**/*.int.spec.ts", "**/*.e2e.*", "src/main.ts"],
+  "reporter": ["text-summary", "lcov", "html"],
+  "all": false,
+  "sourceMap": true,
+  "instrument": false,
+  "check-coverage": false
+}

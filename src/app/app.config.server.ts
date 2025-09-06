@@ -1,12 +1,12 @@
-import { mergeApplicationConfig, ApplicationConfig } from '@angular/core';
-import { provideServerRendering, withRoutes } from '@angular/ssr';
-import { appConfig } from './app.config';
-import { serverRoutes } from './app.routes.server';
+import { ApplicationConfig } from '@angular/core';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
+import { routes } from './app.routes';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { mockBackendInterceptor } from './core/mock/mock-backend.interceptor';
 
-const serverConfig: ApplicationConfig = {
+export const appConfig: ApplicationConfig = {
   providers: [
-    provideServerRendering(withRoutes(serverRoutes))
+    provideRouter(routes, withComponentInputBinding()),
+    provideHttpClient(withInterceptors([mockBackendInterceptor])),
   ]
 };
-
-export const config = mergeApplicationConfig(appConfig, serverConfig);

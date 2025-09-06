@@ -1,7 +1,15 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { App } from './app/app';
-import { config } from './app/app.config.server';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideRouter } from '@angular/router';
+import 'zone.js'
 
-const bootstrap = () => bootstrapApplication(App, config);
+import { AppComponent } from './app/app.component';
+import { routes } from './app/app.routes';
+import { mockBackendInterceptor } from './app/core/mock/mock-backend.interceptor';
 
-export default bootstrap;
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideRouter(routes),                        
+    provideHttpClient(withInterceptors([mockBackendInterceptor])),
+  ],
+}).catch(err => console.error(err));
